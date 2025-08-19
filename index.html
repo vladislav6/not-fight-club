@@ -31,9 +31,9 @@
     </div>
     <div class="character main-block" id="character">
       <div class="character-image">
-        <img src="./assets/avatar/default.jpg" alt="character image" loading="lazy">
+        <img id="currentAvatar" src="./assets/avatar/default.jpg" alt="character image" loading="lazy">
         <div class="edit-image">
-          <div class="edit-icon">
+          <div id="editAvatar" class="edit-icon">
             <img src="./assets/icons/edit.svg" alt="edit" loading="lazy">
           </div>
         </div>
@@ -47,14 +47,14 @@
             <p class="loses">Loses: <span id="loses">0</span></p>
         </div>
       </div>
-      <div class="popup">
+      <div id="popup" class="popup">
         <div class="close-popup">
-         <img src="./assets/icons/close.svg" alt="close" loading="lazy">
+         <img id="closePopup" src="./assets/icons/close.svg" alt="close" loading="lazy">
         </div>
         <div class="image-list">
           <div class="avatar-image">
             <img src="./assets/avatar/default.jpg" alt="default" loading="lazy">
-            <div class="check-image checked">
+            <div class="check-image" data-type="default.jpg">
               <div class="check-icon">
                 <img src="./assets/icons/check_circle.svg" alt="check" loading="lazy">
               </div>
@@ -62,7 +62,7 @@
           </div>
           <div class="avatar-image">
             <img src="./assets/avatar/avatar1.png" alt="avatar1" loading="lazy">
-            <div class="check-image">
+            <div class="check-image" data-type="avatar1.png">
               <div class="check-icon">
                 <img src="./assets/icons/check_circle.svg" alt="check" loading="lazy">
               </div>
@@ -70,7 +70,7 @@
           </div>
           <div class="avatar-image">
             <img src="./assets/avatar/avatar2.jpg" alt="avatar2" loading="lazy">
-            <div class="check-image">
+            <div class="check-image" data-type="avatar2.jpg">
               <div class="check-icon">
                 <img src="./assets/icons/check_circle.svg" alt="check" loading="lazy">
               </div>
@@ -78,7 +78,7 @@
           </div>
           <div class="avatar-image">
              <img src="./assets/avatar/avatar3.jpg" alt="avatar3" loading="lazy">
-            <div class="check-image">
+            <div class="check-image" data-type="avatar3.jpg">
               <div class="check-icon">
                 <img src="./assets/icons/check_circle.svg" alt="check" loading="lazy">
               </div>
@@ -97,7 +97,7 @@
       <div class="about-character-block my">
         <div id="myBattleName" class="name">vlad</div>
         <div class="image-character">
-          <img src="./assets/avatar/default.jpg" alt="my image character" loading="lazy">
+          <img id="myBattleAvatar" src="./assets/avatar/default.jpg" alt="my image character" loading="lazy">
         </div>
         <div class="life-points">
           <progress class="health" value="150" max="150"></progress>
