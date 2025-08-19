@@ -8,39 +8,39 @@
   <title>Not Fight Club</title>
 </head>
 <body>
-  <div class="main-wrapper">
-    <div class="header">
+  <div id="mainWrapp" class="main-wrapper">
+    <div class="header" id="header">
       <div class="header-left">
-        <span class="page-name">Battle</span>
+        <span id="pageName" class="page-name">Battle</span>
       </div>
-      <div class="header-right">
-        <img src="./assets/icons/home.svg" alt="home">
-        <img src="./assets/icons/character.svg" alt="character">
-        <img src="./assets/icons/settings.svg" alt="settings">
+      <div id="barButtons" class="header-right">
+        <img src="./assets/icons/home.svg" alt="main" loading="lazy">
+        <img src="./assets/icons/character.svg" alt="character" loading="lazy">
+        <img src="./assets/icons/settings.svg" alt="settings" loading="lazy">
       </div>
     </div>
-    <div class="register">
+    <div class="register main-block" id="register">
       <div class="wrapp">
         <div class="title">Create Your Character</div>
         <label><p>Character Name</p> <input id="inputName" type="text"></label>
-        <p><button id="create" type="button">Create Character</button></p>
+        <p><button id="create" type="submit">Create Character</button></p>
       </div>
     </div>
-    <div class="home">
+    <div class="home main-block" id="home">
       <button id="fight" type="button">Fight!</button>
     </div>
-    <div class="character">
+    <div class="character main-block" id="character">
       <div class="character-image">
-        <img src="./assets/avatar/default.jpg" alt="character image">
+        <img src="./assets/avatar/default.jpg" alt="character image" loading="lazy">
         <div class="edit-image">
           <div class="edit-icon">
-            <img src="./assets/icons/edit.svg" alt="edit">
+            <img src="./assets/icons/edit.svg" alt="edit" loading="lazy">
           </div>
         </div>
       </div>
       <div class="about-character">
         <div class="name">
-          <span class="name-character">VLad</span>
+          <span id="nameCharacter" class="name-character">VLad</span>
         </div>
         <div class="statistics">
             <p class="wins">Wins: <span id="wins">0</span></p>
@@ -49,55 +49,55 @@
       </div>
       <div class="popup">
         <div class="close-popup">
-         <img src="./assets/icons/close.svg" alt="close">
+         <img src="./assets/icons/close.svg" alt="close" loading="lazy">
         </div>
         <div class="image-list">
           <div class="avatar-image">
-            <img src="./assets/avatar/default.jpg" alt="default">
+            <img src="./assets/avatar/default.jpg" alt="default" loading="lazy">
             <div class="check-image checked">
               <div class="check-icon">
-                <img src="./assets/icons/check_circle.svg" alt="check">
+                <img src="./assets/icons/check_circle.svg" alt="check" loading="lazy">
               </div>
             </div>
           </div>
           <div class="avatar-image">
-            <img src="./assets/avatar/avatar1.png" alt="avatar1">
+            <img src="./assets/avatar/avatar1.png" alt="avatar1" loading="lazy">
             <div class="check-image">
               <div class="check-icon">
-                <img src="./assets/icons/check_circle.svg" alt="check">
+                <img src="./assets/icons/check_circle.svg" alt="check" loading="lazy">
               </div>
             </div>
           </div>
           <div class="avatar-image">
-            <img src="./assets/avatar/avatar2.jpg" alt="avatar2">
+            <img src="./assets/avatar/avatar2.jpg" alt="avatar2" loading="lazy">
             <div class="check-image">
               <div class="check-icon">
-                <img src="./assets/icons/check_circle.svg" alt="check">
+                <img src="./assets/icons/check_circle.svg" alt="check" loading="lazy">
               </div>
             </div>
           </div>
           <div class="avatar-image">
-             <img src="./assets/avatar/avatar3.jpg" alt="avatar3">
+             <img src="./assets/avatar/avatar3.jpg" alt="avatar3" loading="lazy">
             <div class="check-image">
               <div class="check-icon">
-                <img src="./assets/icons/check_circle.svg" alt="check">
+                <img src="./assets/icons/check_circle.svg" alt="check" loading="lazy">
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="settings">
+    <div class="settings main-block" id="settings">
       <div class="change-name">
         <p>Player Name: <span id="playerName">vlad</span></p>
         <button id="edit" type="button">Edit</button> 
       </div>
     </div>
-    <div class="battle">
+    <div id="battle" class="battle main-block">
       <div class="about-character-block my">
-        <div class="name">vlad</div>
+        <div id="myBattleName" class="name">vlad</div>
         <div class="image-character">
-          <img src="./assets/avatar/default.jpg" alt="my image character">
+          <img src="./assets/avatar/default.jpg" alt="my image character" loading="lazy">
         </div>
         <div class="life-points">
           <progress class="health" value="150" max="150"></progress>
@@ -129,7 +129,7 @@
       <div class="about-character-block enemy">
         <div class="name">Spacemarine</div>
         <div class="image-character">
-          <img src="./assets/enemy/Spacemarine.png" alt="enemy image character">
+          <img src="./assets/enemy/Spacemarine.png" alt="enemy image character" loading="lazy">
         </div>
         <div class="life-points">
           <progress class="health" value="120" max="120"></progress>
@@ -137,7 +137,7 @@
         </div>
       </div>
     </div>
-    <div class="battlefield"></div>
+    <div id="battlefield" class="battlefield"></div>
   </div>
   <script src="./js/index.js"></script>
 </body>

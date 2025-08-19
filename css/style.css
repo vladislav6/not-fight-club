@@ -41,6 +41,14 @@ body {
   overflow: hidden;
 }
 
+.header,
+.register,
+.home,
+.character,
+.settings,
+.battle,
+.battlefield { visibility: hidden; }
+
 .register,
 .home,
 .character,
@@ -50,18 +58,25 @@ body {
   height: calc(100vh - 50px);
 }
 
-.register {
+.visible-page {
   z-index: 1;
+  visibility: visible;
+}
+
+.register {
+  z-index: 0;
   top: 0;
   height: 100vh;
 }
 
 .home,
-.header {z-index: 2;}
-.character {z-index: 3;}
-.settings {z-index: 4;}
+.header {z-index: 0;}
+.character {z-index: 0;}
+.settings {z-index: 0;}
 .battle,
-.battlefield {z-index: 500;}
+.battlefield {z-index: 0;}
+
+.visible-page { z-index: 1; }
 
 .wrapp { width: 20%; }
 
