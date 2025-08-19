@@ -1,3 +1,7 @@
+function editNameInput(name) {
+  return `<input class="save-edit-name" id="saveNameInput" type="text" value="${name}"><button id="saveNameButton" type="button">Save</button>`;
+}
+
 const mainWrapp = document.getElementById('mainWrapp');
 let arr = mainWrapp.getElementsByClassName('main-block');
 let pages = [...arr];
@@ -21,11 +25,9 @@ const closePopup = document.getElementById('closePopup');
 const checkImage = popup.getElementsByClassName('check-image');
 let changeAvatar = [...checkImage];
 
-console.log(checkImage)
-console.log(changeAvatar)
-
 const settings = document.getElementById('settings');
 const playerName = document.getElementById('playerName');
+const edit = document.getElementById('edit');
 
 const battle = document.getElementById('battle');
 const myBattleName = document.getElementById('myBattleName');
@@ -83,9 +85,18 @@ closePopup.addEventListener('click', () => {
     popup.removeAttribute('style');
 });
 
+edit.addEventListener('click', () => {
+  playerName.innerHTML = editNameInput(userName);
+  edit.setAttribute('style', 'display: none;')
 
+const saveNameInput = document.getElementById('saveNameInput');
+const saveNameButton = document.getElementById('saveNameButton');
+saveNameButton.addEventListener('click', () => {
+  localStorage.setItem('name', saveNameInput.value);
+  location.reload();
+});
 
-
+});
 
   switch (currentPage){
     case 'character':

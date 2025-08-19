@@ -246,6 +246,8 @@ button:hover { background-color: antiquewhite; }
   margin: 0 50px;
 }
 .settings .change-name button {width: 10%;}
+.settings .change-name p span input[type=text] { width: 150px; margin-right: 20px;}
+.settings .change-name p span button { width: 100px; }
 
 .battle {
   height: calc(100vh - 350px);
@@ -342,6 +344,9 @@ button:hover { background-color: antiquewhite; }
     top: 10%; 
   }
   .settings .change-name button {width: 20%;}
+  .settings .change-name p span {margin: 5px;}
+  .settings .change-name p span input[type=text] { width: 90px;}
+  .settings .change-name p span button  { width: 80px;}
 
   .battle {
       display: grid;
@@ -350,7 +355,7 @@ button:hover { background-color: antiquewhite; }
         "my-avatat enemy"
         "attack-defence attack-defence"
       ;
-      height: calc(100vh - 300px);
+      height: calc(100vh - 290px);
       
   }
   
@@ -377,6 +382,6 @@ button:hover { background-color: antiquewhite; }
     justify-content: center;
   }
   
-  .battlefield {height: 250px;}
+  .battlefield {height: 240px;}
 
 }
