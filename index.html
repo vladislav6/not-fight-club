@@ -89,7 +89,8 @@
     </div>
     <div class="settings">
       <div class="change-name">
-        <span>Player Name: vlad</span> <button id="edit" type="button">Edit</button> 
+        <p>Player Name: <span id="playerName">vlad</span></p>
+        <button id="edit" type="button">Edit</button> 
       </div>
     </div>
     <div class="battle">
@@ -105,21 +106,23 @@
       </div>
       <div class="attack-defence-zone">
         <p>Please pick 1 Attack zone and 2 Defence zones</p>
-        <div class="check-attack-zone">
-          <p>Attack Zones</p>
-          <label>head <input type="radio"></label>
-          <label>Neck <input type="radio"></label>
-          <label>Body <input type="radio"></label>
-          <label>Belly <input type="radio"></label>
-          <label>Legs <input type="radio"></label>
-        </div>
-        <div class="check-defence-zone">
-          <p>Defence Zones</p>
-          <label><input type="radio"> Head</label>
-          <label><input type="radio"> Neck</label>
-          <label><input type="radio">Body</label>
-          <label><input type="radio">Belly</label>
-          <label><input type="radio">Legs</label>
+        <div class="column">
+          <div class="check-attack-zone">
+            <p>Attack Zones</p>
+            <label>head <input type="radio"></label>
+            <label>Neck <input type="radio"></label>
+            <label>Body <input type="radio"></label>
+            <label>Belly <input type="radio"></label>
+            <label>Legs <input type="radio"></label>
+          </div>
+          <div class="check-defence-zone">
+            <p>Defence Zones</p>
+            <label><input type="radio"> Head</label>
+            <label><input type="radio"> Neck</label>
+            <label><input type="radio">Body</label>
+            <label><input type="radio">Belly</label>
+            <label><input type="radio">Legs</label>
+          </div>
         </div>
         <button id="attack" type="button" disabled>Attack!</button>
       </div>
@@ -133,8 +136,8 @@
           <p><span id="valueHealth">120</span> / 120</p>
         </div>
       </div>
-      <div class="battlefield"></div>
     </div>
+    <div class="battlefield"></div>
   </div>
   <script src="./js/index.js"></script>
 </body>
