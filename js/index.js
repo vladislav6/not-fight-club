@@ -1,23 +1,31 @@
 const whoEnemy = Math.floor(Math.random() * 3);
 
+const zone = ['head', 'neck', 'body', 'belly', 'legs'];
+
 const enemies = [{
   enemyName: 'Spacemarine', 
   enemyHealth: 120, 
   enemyMaxH: 120, 
   enemyAvatar: 'Spacemarine.png',
-  damage: 10
+  damage: 10,
+  countAttack: 1,
+  countDefence: 2
 }, {
   enemyName: 'Snow troll', 
   enemyHealth: 150, 
   enemyMaxH: 150, 
   enemyAvatar: 'SnowTroll.png',
-  damage: 10
+  damage: 10,
+  countAttack: 1,
+  countDefence: 1
 }, {
   enemyName: 'Spider', 
   enemyHealth: 100, 
   enemyMaxH: 100, 
   enemyAvatar: 'spider_100.png',
-  damage: 20
+  damage: 20,
+  countAttack: 2,
+  countDefence: 2
 }];
 
 function editNameInput(name) {
@@ -38,6 +46,38 @@ function checkUncheckInput (selector, callback){
       callback(arr);
     });
   });
+}
+
+function botAttack(whichEnemy, whoEnemy, whichZone) {
+  let a = [];
+
+  for (let i = 0; i < whichZone.length; i++) {
+    if (a.length < whichEnemy[whoEnemy].countAttack)
+      a.push(whichZone[Math.floor(Math.random() * whichZone.length)]);
+    if (whichEnemy[whoEnemy].countAttack > 1) {
+      if (a[0] === a[1]) {
+        a[1] = whichZone[Math.floor(Math.random() * whichZone.length)];
+      } 
+    }
+  }
+
+  return a;
+}
+
+function botDefence(whichEnemy, whoEnemy, whichZone) {
+  let d = [];
+
+  for (let i = 0; i < whichZone.length; i++) {
+    if (d.length < whichEnemy[whoEnemy].countDefence)
+      d.push(whichZone[Math.floor(Math.random() * whichZone.length)]);
+    if (whichEnemy[whoEnemy].countDefence > 1) {
+      if (d[0] === d[1]) {
+        d[1] = whichZone[Math.floor(Math.random() * whichZone.length)];
+      } 
+    }
+  }
+
+  return d;
 }
 
 const mainWrapp = document.getElementById('mainWrapp');
@@ -83,8 +123,6 @@ const enemyProgressHealth = document.getElementById('enemyProgressHealth');
 const enemyMaxHealth = document.getElementById('enemyMaxHealth');
 
 const inputs = document.querySelectorAll('input[type=radio]');
-//const attackInputs = document.querySelectorAll('.attack');
-//const defenceInputs = document.querySelectorAll('.defence');
 
 const battlefield = document.getElementById('battlefield');
 
@@ -98,7 +136,7 @@ create.addEventListener(('click'), () => {
   localStorage.setItem('myHealth', 150);
   localStorage.setItem('enemy', whoEnemy);
   localStorage.setItem('enemyHealth', enemies[whoEnemy].enemyHealth);
-  localStorage.setItem('list', '[]');
+  localStorage.setItem('list', '');
   localStorage.setItem('currentPage', 'main');
   location.reload();
 });
@@ -111,6 +149,7 @@ const loses = localStorage.getItem('loses');
 const myHealth = localStorage.getItem('myHealth');
 const enemyHealth = localStorage.getItem('enemyHealth');
 const enemy = localStorage.getItem('enemy');
+let list = localStorage.getItem('list');
 
 if (!userName) {
   register.classList.add('visible-page');
@@ -158,10 +197,6 @@ edit.addEventListener('click', () => {
 
 });
 
-attack.addEventListener('click', () => {
-  console.log('attack')
-});
-
   switch (currentPage){
     case 'character':
       pages.map((value)=>{value.classList.remove('visible-page')});
@@ -201,19 +236,59 @@ attack.addEventListener('click', () => {
         let c = [];
         a.forEach((v) => {
           if (v.hasAttribute('checked') && v.classList.contains('attack')) {
-            b.push(v);
+            b.push(v.getAttribute('value'));
           } else if (v.hasAttribute('checked') && v.classList.contains('defence')) {
-            c.push(v)
+            c.push(v.getAttribute('value'))
           }
         })
         if (b.length === 1 && c.length === 2) {
           attack.removeAttribute('disabled');
+          attack.addEventListener('click', () => {
+          let e = botAttack(enemies, enemy, zone);
+          let w = botDefence(enemies, enemy, zone);
+          list = list.split(',');
+          if (w.includes(b[0])) {
+            list.push(`<div>
+                      <p>bot defence</p>
+                      <span>${w}</span>
+                      <span>${b[0]}</span>
+                      <p>------------</p>
+                    </div>`);
+          } else {
+              list.push(`<div>
+                    <p>i damage</p>
+                    <span>${w}</span>
+                    <span>${b[0]}</span>
+                    <p>----------</p>
+                  </div>`);
+          }
+
+          for (let i = 0; i < e.length; i++) {
+            if (c.includes(e[i])) {
+               list.push(`<div>
+                          <p>i defence</p>
+                          <span>${c}</span>
+                          <span>${e[i]}</span>
+                          <p>----------</p>
+                        </div>`);
+            } else {
+               list.push(`<div>
+                          <p>bot damage</p>
+                          <span>${c}</span>
+                          <span>${e[i]}</span>
+                          <p>----------</p>
+                        </div>`);
+            }
+          }
+          localStorage.setItem('list', list.join(' '));
+          location.reload();
+        });
         } else {
           if(!attack.hasAttribute('disabled'))
-            attack.setAttribute('disabled', '');
-        }
+            attack.setAttribute('disabled', '');      
+      }
       });
-    
+      battlefield.innerHTML = list;
       break;
     default:
         pages.map((value)=>{value.classList.remove('visible-page')});

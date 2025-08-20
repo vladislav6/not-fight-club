@@ -286,6 +286,7 @@ button:hover { background-color: antiquewhite; }
   left: 0;
   right: 0;
   height: 300px;
+  overflow-y: scroll;
 }
 
 .attack-defence-zone { width: 20%; }
