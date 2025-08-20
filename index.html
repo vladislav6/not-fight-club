@@ -100,8 +100,8 @@
           <img id="myBattleAvatar" src="./assets/avatar/default.jpg" alt="my image character" loading="lazy">
         </div>
         <div class="life-points">
-          <progress class="health" value="150" max="150"></progress>
-          <p><span id="valueHealth">150</span> / 150</p>
+          <progress id="myProgressHealth" class="health" value="150" max="150"></progress>
+          <p><span id="myValueHealth">150</span> / 150</p>
         </div>
       </div>
       <div class="attack-defence-zone">
@@ -109,31 +109,31 @@
         <div class="column">
           <div class="check-attack-zone">
             <p>Attack Zones</p>
-            <label>head <input type="radio" readonly></label>
-            <label>Neck <input type="radio" readonly></label>
-            <label>Body <input type="radio" readonly></label>
-            <label>Belly <input type="radio" readonly></label>
-            <label>Legs <input type="radio" readonly></label>
+            <label>Head <input class="attack" type="radio" value="head"></label>
+            <label>Neck <input class="attack" type="radio" value="nech"></label>
+            <label>Body <input class="attack" type="radio" value="body"></label>
+            <label>Belly <input class="attack" type="radio" value="belly"></label>
+            <label>Legs <input class="attack" type="radio" value="legs"></label>
           </div>
           <div class="check-defence-zone">
             <p>Defence Zones</p>
-            <label><input type="radio" readonly> Head</label>
-            <label><input type="radio" readonly> Neck</label>
-            <label><input type="radio" readonly>Body</label>
-            <label><input type="radio" readonly>Belly</label>
-            <label><input type="radio" readonly>Legs</label>
+            <label><input class="defence" type="radio" value="head"> Head</label>
+            <label><input class="defence" type="radio" value="nech"> Neck</label>
+            <label><input class="defence" type="radio" value="body">Body</label>
+            <label><input class="defence" type="radio" value="belly">Belly</label>
+            <label><input class="defence" type="radio" value="legs">Legs</label>
           </div>
         </div>
         <button id="attack" type="button" disabled>Attack!</button>
       </div>
       <div class="about-character-block enemy">
-        <div class="name">Spacemarine</div>
+        <div id="enemyBattleName" class="name">Spacemarine</div>
         <div class="image-character">
-          <img src="./assets/enemy/Spacemarine.png" alt="enemy image character" loading="lazy">
+          <img id="enemyBattleAvatar" src="./assets/enemy/Spacemarine.png" alt="enemy image character" loading="lazy">
         </div>
         <div class="life-points">
-          <progress class="health" value="120" max="120"></progress>
-          <p><span id="valueHealth">120</span> / 120</p>
+          <progress id="enemyProgressHealth" class="health" value="120" max="120"></progress>
+          <p><span id="enemyValueHealth">120</span> / <span id="enemyMaxHealth">120</span></p>
         </div>
       </div>
     </div>
