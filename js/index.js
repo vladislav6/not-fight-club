@@ -1,5 +1,5 @@
-const whoEnemy = Math.floor(Math.random() * 3);
-
+const whoEnemy = 0;
+const myDamage = 20;
 const zone = ['head', 'neck', 'body', 'belly', 'legs'];
 
 const enemies = [{
@@ -7,7 +7,8 @@ const enemies = [{
   enemyHealth: 120, 
   enemyMaxH: 120, 
   enemyAvatar: 'Spacemarine.png',
-  damage: 10,
+  damage: 20,
+  crit: 25,
   countAttack: 1,
   countDefence: 2
 }, {
@@ -15,7 +16,8 @@ const enemies = [{
   enemyHealth: 150, 
   enemyMaxH: 150, 
   enemyAvatar: 'SnowTroll.png',
-  damage: 10,
+  damage: 20,
+  crit: 25,
   countAttack: 1,
   countDefence: 1
 }, {
@@ -24,9 +26,28 @@ const enemies = [{
   enemyMaxH: 100, 
   enemyAvatar: 'spider_100.png',
   damage: 20,
+  crit: 25,
   countAttack: 2,
   countDefence: 2
 }];
+
+function newEnemy(e) {
+  let result;
+  switch (e){
+    case '0': 
+      result = 1;
+      break;
+    case '1':
+      result = 2;
+      break;
+    case '2':
+      result = 0;
+      break;
+    default: 
+      result = e;
+  }
+  return result;
+}
 
 function editNameInput(name) {
   return `<input class="save-edit-name" id="saveNameInput" type="text" value="${name}"><button id="saveNameButton" type="button">Save</button>`;
@@ -34,7 +55,7 @@ function editNameInput(name) {
 
 function checkUncheckInput (selector, callback){
   let arr = [];
-  selector.forEach((val)=>{
+  selector.forEach((val, ind)=>{
     val.addEventListener('click', ()=>{
       if (val.hasAttribute('checked')) {
         val.removeAttribute('checked');
@@ -121,6 +142,9 @@ const enemyBattleAvatar = document.getElementById('enemyBattleAvatar');
 const enemyValueHealth = document.getElementById('enemyValueHealth');
 const enemyProgressHealth = document.getElementById('enemyProgressHealth');
 const enemyMaxHealth = document.getElementById('enemyMaxHealth');
+const endGamePopup = document.getElementById('endGamePopup');
+const closeEndGamePopup = document.getElementById('closeEndGamePopup');
+const endGameMsg = document.getElementById('endGameMsg');
 
 const inputs = document.querySelectorAll('input[type=radio]');
 
@@ -128,6 +152,7 @@ const battlefield = document.getElementById('battlefield');
 
 const inputName = document.getElementById('inputName');
 const create = document.getElementById('create');
+
 create.addEventListener(('click'), () => {
   localStorage.setItem('name', inputName.value);
   localStorage.setItem('avatar', 'default.jpg');
@@ -230,7 +255,7 @@ edit.addEventListener('click', () => {
       enemyProgressHealth.value = enemyHealth;
       enemyMaxHealth.innerHTML = enemies[enemy].enemyMaxH;
       enemyProgressHealth.setAttribute('max', enemies[enemy].enemyMaxH);
-     
+    
       checkUncheckInput(inputs, (a)=>{
         let b = [];
         let c = [];
@@ -247,39 +272,38 @@ edit.addEventListener('click', () => {
           let e = botAttack(enemies, enemy, zone);
           let w = botDefence(enemies, enemy, zone);
           list = list.split(',');
-          if (w.includes(b[0])) {
-            list.push(`<div>
-                      <p>bot defence</p>
-                      <span>${w}</span>
-                      <span>${b[0]}</span>
-                      <p>------------</p>
-                    </div>`);
-          } else {
-              list.push(`<div>
-                    <p>i damage</p>
-                    <span>${w}</span>
-                    <span>${b[0]}</span>
-                    <p>----------</p>
-                  </div>`);
-          }
+          let chance = Math.floor(Math.random() * 4);
 
           for (let i = 0; i < e.length; i++) {
             if (c.includes(e[i])) {
-               list.push(`<div>
-                          <p>i defence</p>
-                          <span>${c}</span>
-                          <span>${e[i]}</span>
-                          <p>----------</p>
-                        </div>`);
-            } else {
-               list.push(`<div>
-                          <p>bot damage</p>
-                          <span>${c}</span>
-                          <span>${e[i]}</span>
-                          <p>----------</p>
-                        </div>`);
+              list.unshift(`<p class="log-line"><span>${enemies[enemy].enemyName.toUpperCase()}</span> attacked <span>${userName.toUpperCase()}</span> to <span>${e[i].toUpperCase()}</span> but ${userName} was able to protect his ${e[i]}.</p>`);
+            } else if (chance === 1) {
+                list.unshift(`<p class="log-line"><span>${enemies[enemy].enemyName.toUpperCase()}</span> attacked <span>${userName.toUpperCase()}</span> to <span>${e[i].toUpperCase()}</span>. ${userName} tried to block but ${enemies[enemy].enemyName} was very lucky and crit his oppenent for <span class="crit">${enemies[enemy].crit} damage</span>.</p>`);
+                let newMyHealth = myHealth - enemies[enemy].crit;
+                localStorage.setItem('myHealth', newMyHealth);
+              } else if (chance === 0) {
+                list.unshift(`<p class="log-line"><span>${enemies[enemy].enemyName.toUpperCase()}</span> attacked <span>${userName.toUpperCase()}</span> to <span>${e[i].toUpperCase()}</span> and crit <span class="crit">${enemies[enemy].crit} damage</span>.</p>`);
+                let newMyHealth = myHealth - enemies[enemy].crit;
+                localStorage.setItem('myHealth', newMyHealth);
+              } else {
+              list.unshift(`<p class="log-line"><span>${enemies[enemy].enemyName.toUpperCase()}</span> attacked <span>${userName.toUpperCase()}</span> to <span>${e[i].toUpperCase()}</span> and deal <span class="damage">${enemies[enemy].damage} damage</span>.</p>`);
+              let newMyHealth = myHealth - enemies[enemy].damage;
+              localStorage.setItem('myHealth', newMyHealth);
+                if (!c.includes(e[i-1]) && i > 0) {
+                  let newMyHealth2 = newMyHealth - enemies[enemy].damage;
+                  localStorage.setItem('myHealth', newMyHealth2);
+                }
             }
           }
+
+          if (w.includes(b[0])) {
+            list.unshift(`<p class="log-line"><span>${userName.toUpperCase()}</span> attacked <span>${enemies[enemy].enemyName.toUpperCase()}</span> to <span>${b[0].toUpperCase()}</span> but ${enemies[enemy].enemyName} was able to protect his ${b[0]}.</p>`);
+          } else {
+            list.unshift(`<p class="log-line"><span>${userName.toUpperCase()}</span> attacked <span>${enemies[enemy].enemyName.toUpperCase()}</span> to <span>${b[0].toUpperCase()}</span> and deal <span class="damage">${myDamage} damage</span>.</p>`);
+            let newEnemyHealth = enemyHealth - myDamage;
+            localStorage.setItem('enemyHealth', newEnemyHealth);
+          }
+
           localStorage.setItem('list', list.join(' '));
           location.reload();
         });
@@ -288,6 +312,58 @@ edit.addEventListener('click', () => {
             attack.setAttribute('disabled', '');      
       }
       });
+      let nE = newEnemy(enemy);
+      let winCount = Number(wins);
+      let loseCount = Number(loses);
+      if (myHealth < 1 && enemyHealth < 1) {
+        endGamePopup.setAttribute('style', 'display: flex;');
+        endGameMsg.innerHTML = 'No one won. Good luck next time!';
+        closeEndGamePopup.addEventListener('click', () => {
+          if (endGamePopup.hasAttribute('style'))
+            endGamePopup.removeAttribute('style');
+
+          localStorage.setItem('currentPage', 'character');
+          localStorage.setItem('myHealth', 150);
+          localStorage.setItem('enemy', nE);
+          localStorage.setItem('enemyHealth', enemies[nE].enemyHealth);
+          localStorage.setItem('list', '');
+          location.reload();
+        });
+      } else if (myHealth < 1) {
+        loseCount = loseCount + 1;
+        localStorage.setItem('loses', loseCount);
+        endGamePopup.setAttribute('style', 'display: flex;');
+        endGameMsg.innerHTML = 'Maybe next time :(';
+
+        closeEndGamePopup.addEventListener('click', () => {
+          if (endGamePopup.hasAttribute('style'))
+            endGamePopup.removeAttribute('style');
+
+          localStorage.setItem('currentPage', 'character');
+          localStorage.setItem('myHealth', 150);
+          localStorage.setItem('enemy', nE);
+          localStorage.setItem('enemyHealth', enemies[nE].enemyHealth);
+          localStorage.setItem('list', '');
+          location.reload();
+        });
+      } else if (enemyHealth < 1) {
+        winCount = winCount + 1;
+        localStorage.setItem('wins', winCount);
+        endGamePopup.setAttribute('style', 'display: flex;');
+        endGameMsg.innerHTML = 'Congratulations with your win!';
+
+        closeEndGamePopup.addEventListener('click', () => {
+          if (endGamePopup.hasAttribute('style'))
+            endGamePopup.removeAttribute('style');
+
+          localStorage.setItem('currentPage', 'character');
+          localStorage.setItem('myHealth', 150);
+          localStorage.setItem('enemy', nE);
+          localStorage.setItem('enemyHealth', enemies[nE].enemyHealth);
+          localStorage.setItem('list', '');
+          location.reload();
+        });
+      }
       battlefield.innerHTML = list;
       break;
     default:
