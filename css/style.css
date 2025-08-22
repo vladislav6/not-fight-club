@@ -22,6 +22,14 @@ body {
   padding: 0 10px;
 }
 
+.header-left { display: flex; }
+
+.history-button {
+  cursor: pointer;
+  color: darkslateblue;
+  display: none;
+}
+
 .header-right img {
   margin: 0 5px;
   cursor: pointer;
@@ -281,7 +289,7 @@ button:hover { background-color: antiquewhite; }
 .battlefield{
   border-top: 1px solid #000;
   background-color: #fff;
-  position: absolute;
+  position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
@@ -380,6 +388,12 @@ input[type=radio] { cursor: pointer; }
 }
 
 @media (max-width: 550px) {
+
+  .history-button { 
+    display: block;
+    padding-left: 4px;
+  }
+
   .home button { width: 20%; }
   .popup { 
     left: 25%;
@@ -397,7 +411,7 @@ input[type=radio] { cursor: pointer; }
         "my-avatat enemy"
         "attack-defence attack-defence"
       ;
-      height: calc(100vh - 290px);
+      height: calc(100vh - 50px);
       
   }
   
@@ -424,6 +438,13 @@ input[type=radio] { cursor: pointer; }
     justify-content: center;
   }
   
-  .battlefield {height: 240px;}
+  .battlefield {height: 250px;display: none;}
+  .show { display: block; }
+}
 
+@media (max-height: 690px) {
+  .history-button { display: block; }
+  .battle { height: calc(100vh - 50px); }
+  .battlefield { display: none; }
+  .show { display: block; }
 }

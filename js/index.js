@@ -55,7 +55,7 @@ function editNameInput(name) {
 
 function checkUncheckInput (selector, callback){
   let arr = [];
-  selector.forEach((val, ind)=>{
+  selector.forEach((val)=>{
     val.addEventListener('click', ()=>{
       if (val.hasAttribute('checked')) {
         val.removeAttribute('checked');
@@ -110,6 +110,7 @@ const register = document.getElementById('register');
 const header = document.getElementById('header');
 const page = document.getElementById('pageName');
 const barButtons = document.getElementById('barButtons');
+const showHideHistory = document.getElementById('showHideHistory');
 let headerButtons = barButtons.getElementsByTagName('img');
 
 const home = document.getElementById('home');
@@ -174,12 +175,17 @@ const loses = localStorage.getItem('loses');
 const myHealth = localStorage.getItem('myHealth');
 const enemyHealth = localStorage.getItem('enemyHealth');
 const enemy = localStorage.getItem('enemy');
+let check = localStorage.getItem('check');
 let list = localStorage.getItem('list');
 
 if (!userName) {
   register.classList.add('visible-page');
 } else {
   header.classList.add('visible-page');
+
+  showHideHistory.addEventListener('click', () => {
+    battlefield.classList.toggle('show');
+  })
 
 for (let i = 0; i < headerButtons.length; i++ ){
   headerButtons[i].addEventListener('click', () => {
