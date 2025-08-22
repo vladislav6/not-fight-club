@@ -297,6 +297,10 @@ edit.addEventListener('click', () => {
                 list.unshift(`<p class="log-line"><span>${enemies[enemy].enemyName.toUpperCase()}</span> attacked <span>${userName.toUpperCase()}</span> to <span>${e[i].toUpperCase()}</span> and crit <span class="crit">${enemies[enemy].crit} damage</span>.</p>`);
                 let newMyHealth = myHealth - enemies[enemy].crit;
                 localStorage.setItem('myHealth', newMyHealth);
+                  if (!c.includes(e[i-1]) && i > 0) {
+                    let newMyHealth2 = newMyHealth - enemies[enemy].crit;
+                    localStorage.setItem('myHealth', newMyHealth2);
+                  }
               } else {
               list.unshift(`<p class="log-line"><span>${enemies[enemy].enemyName.toUpperCase()}</span> attacked <span>${userName.toUpperCase()}</span> to <span>${e[i].toUpperCase()}</span> and deal <span class="damage">${enemies[enemy].damage} damage</span>.</p>`);
               let newMyHealth = myHealth - enemies[enemy].damage;
