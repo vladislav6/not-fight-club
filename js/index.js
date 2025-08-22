@@ -248,6 +248,7 @@ edit.addEventListener('click', () => {
       pages.map((value)=>{value.classList.remove('visible-page')});
       battle.classList.add('visible-page');
       battlefield.classList.add('visible-page');
+      showHideHistory.classList.add('visible-page');
       page.innerHTML = 'Battle';
 
       myBattleName.innerHTML = userName;

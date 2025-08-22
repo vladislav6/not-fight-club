@@ -50,6 +50,7 @@ body {
 }
 
 .header,
+.history-button,
 .register,
 .home,
 .character,
@@ -353,6 +354,8 @@ input[type=radio] { cursor: pointer; }
   border-radius: 5px;
 }
 
+
+
 @media (max-width: 1200px) {
   .wrapp {
      width: 40%;
@@ -437,13 +440,25 @@ input[type=radio] { cursor: pointer; }
     flex-wrap: wrap;
     justify-content: center;
   }
-  
+
+  .popup-content {
+    width: 70%;
+  }
+
+  .popup-content p {
+    font-size: 1.2rem;
+  }
+
   .battlefield {height: 250px;display: none;}
   .show { display: block; }
 }
 
 @media (max-height: 690px) {
-  .history-button { display: block; }
+  .history-button { 
+    display: block;
+    padding-left: 4px;
+  }
+
   .battle { height: calc(100vh - 50px); }
   .battlefield { display: none; }
   .show { display: block; }
