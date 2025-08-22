@@ -185,6 +185,11 @@ if (!userName) {
 
   showHideHistory.addEventListener('click', () => {
     battlefield.classList.toggle('show');
+    if (battlefield.classList.contains('show')) {
+        showHideHistory.innerHTML = '| Hide battle history';
+      } else {
+        showHideHistory.innerHTML = '| Show battle history';
+      }
   })
 
 for (let i = 0; i < headerButtons.length; i++ ){
