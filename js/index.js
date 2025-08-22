@@ -293,6 +293,10 @@ edit.addEventListener('click', () => {
                 list.unshift(`<p class="log-line"><span>${enemies[enemy].enemyName.toUpperCase()}</span> attacked <span>${userName.toUpperCase()}</span> to <span>${e[i].toUpperCase()}</span>. ${userName} tried to block but ${enemies[enemy].enemyName} was very lucky and crit his oppenent for <span class="crit">${enemies[enemy].crit} damage</span>.</p>`);
                 let newMyHealth = myHealth - enemies[enemy].crit;
                 localStorage.setItem('myHealth', newMyHealth);
+                  if (!c.includes(e[i-1]) && i > 0) {
+                    let newMyHealth2 = newMyHealth - enemies[enemy].crit;
+                    localStorage.setItem('myHealth', newMyHealth2);
+                  }
               } else if (chance === 0) {
                 list.unshift(`<p class="log-line"><span>${enemies[enemy].enemyName.toUpperCase()}</span> attacked <span>${userName.toUpperCase()}</span> to <span>${e[i].toUpperCase()}</span> and crit <span class="crit">${enemies[enemy].crit} damage</span>.</p>`);
                 let newMyHealth = myHealth - enemies[enemy].crit;
